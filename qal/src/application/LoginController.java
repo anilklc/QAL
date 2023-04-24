@@ -8,12 +8,18 @@ import DB.DBHelper;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+
 
 public class LoginController {
 
@@ -50,6 +56,18 @@ public class LoginController {
     
     @FXML
     private Label info_label;
+    
+    public void stage(String stageName) throws Exception {
+    	Parent root=FXMLLoader.load(getClass().getResource(stageName));
+    	Stage stage=new Stage();
+    	Scene scene=new Scene(root);
+    	stage.setTitle("QAL");
+    	stage.getIcons().add(new Image("D:\\javaFX\\qal\\src\\image\\icon.png"));
+    	stage.setScene(scene);
+    	stage.show();	
+    }
+    
+   
 
     DBHelper db=new DBHelper();
     PreparedStatement statement;
@@ -66,7 +84,8 @@ public class LoginController {
         	statement.setString(2, password_text.getText().trim());
         	resultSet=statement.executeQuery();
         	while(resultSet.next()) {
-        		
+        	      Platform.exit();
+        		stage("Main.fxml");
         		System.out.println("ogrenci giriş başarılı");
         	}
         	db.connectClose();
