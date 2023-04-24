@@ -1,5 +1,6 @@
 package application;
 
+
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 
 
 public class LoginController {
@@ -57,18 +60,23 @@ public class LoginController {
     @FXML
     private Label info_label;
     
-    public void stage(String stageName) throws Exception {
+   public void stage(String stageName) throws Exception {
     	Parent root=FXMLLoader.load(getClass().getResource(stageName));
     	Stage stage=new Stage();
     	Scene scene=new Scene(root);
     	stage.setTitle("QAL");
     	stage.getIcons().add(new Image("D:\\javaFX\\qal\\src\\image\\icon.png"));
     	stage.setScene(scene);
+    	stage.initStyle(StageStyle.UTILITY);
     	stage.show();	
+    	
     }
-    
+ 
+  
+ 
    
-
+   
+   
     DBHelper db=new DBHelper();
     PreparedStatement statement;
     ResultSet resultSet;
@@ -77,17 +85,20 @@ public class LoginController {
     void login_button_Click(ActionEvent event) {
         if(username_text.getText()!="" & password_text.getText()!="") {
     	if(student_rbutton.isSelected()) {
+    		
         	try {db.connectOpen();
         	query="SELECT * FROM student where studentUsername=? and studentPassword=?";
         	statement=db.connection.prepareStatement(query);
         	statement.setString(1, username_text.getText().trim());
         	statement.setString(2, password_text.getText().trim());
         	resultSet=statement.executeQuery();
-        	while(resultSet.next()) {
-        	      Platform.exit();
-        		stage("Main.fxml");
-        		System.out.println("ogrenci giriş başarılı");
-        	}
+        	resultSet.next();
+        	if (username_text.getText().equals(resultSet.getString("studentUsername")) && password_text.getText().equals(resultSet.getString("studentPassword")))
+            {
+
+        		stage("MainStudent.fxml");
+
+            }
         	db.connectClose();
             statement.close();
             resultSet.close();
@@ -97,16 +108,21 @@ public class LoginController {
         		
         }
         else if(teacher_rbutton.isSelected()) {
+        	
         	try {db.connectOpen();
         	query="SELECT * FROM teacher where teacherUsername=? and teacherPassword=?";
         	statement=db.connection.prepareStatement(query);
         	statement.setString(1, username_text.getText().trim());
         	statement.setString(2, password_text.getText().trim());
         	resultSet=statement.executeQuery();
-        	while(resultSet.next()) {
-        		
-        		System.out.println("ogretmen giriş başarılı");
-        	}
+        	resultSet.next();
+        	if (username_text.getText().equals(resultSet.getString("teacherUsername")) && password_text.getText().equals(resultSet.getString("teacherPassword")))
+            {
+
+        		stage("MainTeacher.fxml");
+
+            }
+        	
         	db.connectClose();
             statement.close();
             resultSet.close();
@@ -121,10 +137,13 @@ public class LoginController {
         	statement.setString(1, username_text.getText().trim());
         	statement.setString(2, password_text.getText().trim());
         	resultSet=statement.executeQuery();
-        	while(resultSet.next()) {
-        		
-        		System.out.println("admin giriş başarılı");
-        	}
+        	resultSet.next();
+        	if (username_text.getText().equals(resultSet.getString("adminUsername")) && password_text.getText().equals(resultSet.getString("adminPassword")))
+            {
+
+        		stage("MainAdmin.fxml");
+
+            }
         	db.connectClose();
             statement.close();
             resultSet.close();
