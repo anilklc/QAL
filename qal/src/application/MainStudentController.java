@@ -33,11 +33,11 @@ public class MainStudentController {
     @FXML
     void profile_button_Click(ActionEvent event) {
     	try {
-        	AnchorPane pane1= (AnchorPane) FXMLLoader.load(getClass().getResource("ProfilEdit.fxml"));
+        	AnchorPane pane1= (AnchorPane) FXMLLoader.load(getClass().getResource("ProfilEditStudent.fxml"));
         	insidePane.getChildren().setAll(pane1);
     		
     	} catch (Exception e) {
-    		// TODO: handle exception
+    		System.out.print(e.getMessage());
     	}
     }
     
@@ -46,6 +46,12 @@ public class MainStudentController {
     @FXML
     void close_button_Click(ActionEvent event) {
     	Platform.exit();
+    }
+    
+    @FXML
+    void initialize() {
+        
+   
     }
 
 }

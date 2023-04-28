@@ -65,11 +65,11 @@ public class MainTeacherController {
     @FXML
     void profile_button_Click(ActionEvent event){
     	try {
-        	AnchorPane pane1= (AnchorPane) FXMLLoader.load(getClass().getResource("ProfilEdit.fxml"));
+        	AnchorPane pane1= (AnchorPane) FXMLLoader.load(getClass().getResource("ProfilEditTeacher.fxml"));
         	insidePane.getChildren().setAll(pane1);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.print(e.getMessage());
 		}
     	
     	

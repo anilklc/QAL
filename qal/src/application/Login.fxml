@@ -81,6 +81,7 @@
                         <Font name="Arial Black" size="10.0" />
                      </font>
                   </Label>
+                  <Label fx:id="id_label" layoutX="18.0" layoutY="33.0" />
                </children>
             </AnchorPane>
          </center>
