@@ -1,6 +1,13 @@
-#İnfo
+#İNFO
 
-SOON
+Günümüz eğitiminde teknoloji çok büyük alan kaplamaktadır QAL uygulamasıda bu durumdan yola çıkarak öğretmenlerin öğrencilerine konuları pekiştirmesi adına sorular sorarak ve öğrencilerin öğretmenlerine anlamadıkları kısımları sorarak daha verimli eğitim almalarını sağlamaya çalışmaktadır.
+
+#SCREEN SHOT
+
+PROJE TAMAMLANDIKTAN SONRA EKLENCEKTİR
+
+#USE-CASE DİAGRAM
+![ DİAGRAM ](https://raw.githubusercontent.com/Iskenderun-Technical-University/ymg-donem-projesi-202503077/main/UML_Diagram.png)
 
 #Contact
 
