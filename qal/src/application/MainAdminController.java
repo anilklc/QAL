@@ -46,6 +46,28 @@ public class MainAdminController {
     private AnchorPane insidePane;
  
     @FXML
+    void student_button_Click(ActionEvent event) {
+    	try {
+        	AnchorPane pane1= (AnchorPane) FXMLLoader.load(getClass().getResource("Student.fxml"));
+        	insidePane.getChildren().setAll(pane1);
+			
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+    }
+    
+    @FXML
+    void teacher_button_Click(ActionEvent event) {
+    	try {
+        	AnchorPane pane1= (AnchorPane) FXMLLoader.load(getClass().getResource("Teacher.fxml"));
+        	insidePane.getChildren().setAll(pane1);
+			
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+    }
+    
+    @FXML
     void profil_button_Click(ActionEvent event) {
     	try {
         	AnchorPane pane1= (AnchorPane) FXMLLoader.load(getClass().getResource("ProfilEditAdmin.fxml"));
