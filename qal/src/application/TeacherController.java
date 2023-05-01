@@ -1,7 +1,11 @@
 package application;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
+
+import DB.DBHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -58,20 +62,57 @@ public class TeacherController {
 
     @FXML
     private Label uyaridel_label;
+    
+    
+    DBHelper db=new DBHelper();
+    PreparedStatement statement;
+    ResultSet resultSet;
+    String query;
+    
+    
+    void comboBoxLoad(ComboBox<String> cmb,ComboBox<String> cmb2) {
+    	
+    	try {	
+    		db.connectOpen();
+        	query="SELECT * FROM teacher";
+        	statement=db.connection.prepareStatement(query);
+        	resultSet=statement.executeQuery();
+        	teacherName_cBox.getItems().clear();
+        	teacherSurname_cBox.getItems().clear();
+        	while (resultSet.next())
+            { cmb.getItems().addAll(resultSet.getString("teacherName")); 
+              cmb2.getItems().addAll(resultSet.getString("teacherSurname")); 
+            }
+        	db.connectClose();
+            statement.close();
+            resultSet.close();	
+       
+    		
+    	}catch (Exception e) {
+    		System.out.println(e.getMessage());
+		} 
+    	
+    }
+    
+    
+     
+    
 
     @FXML
     void teacherAdd_button_Click(ActionEvent event) {
+        comboBoxLoad(teacherName_cBox, teacherSurname_cBox);
 
     }
 
     @FXML
     void teacherDelete_button_Click(ActionEvent event) {
+        comboBoxLoad(teacherName_cBox, teacherSurname_cBox);
 
     }
 
     @FXML
     void initialize() {
-        
+        comboBoxLoad(teacherName_cBox, teacherSurname_cBox);
 
     }
 
