@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/QA5O9x4M)
 #İNFO
 
 Günümüz eğitiminde teknoloji çok büyük alan kaplamaktadır QAL uygulamasıda bu durumdan yola çıkarak öğretmenlerin öğrencilerine konuları pekiştirmesi adına sorular sorarak ve öğrencilerin öğretmenlerine anlamadıkları kısımları sorarak daha verimli eğitim almalarını sağlamaya çalışmaktadır.
