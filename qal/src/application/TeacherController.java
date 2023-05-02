@@ -68,7 +68,7 @@ public class TeacherController {
     PreparedStatement statement;
     ResultSet resultSet;
     String query;
-    
+    String lessonID;
     
     void comboBoxLoad(ComboBox<String> cmb,ComboBox<String> cmb2) {
     	
@@ -94,25 +94,129 @@ public class TeacherController {
     	
     }
     
+   void comboBoxLoad2(ComboBox<String> cmb3) {
+    	
+    	try {	
+    		db.connectOpen();
+        	query="SELECT * FROM lesson";
+        	statement=db.connection.prepareStatement(query);
+        	resultSet=statement.executeQuery();
+        	teacherLessonName_text.getItems().clear();
+        	while (resultSet.next())
+            { 
+              cmb3.getItems().addAll(resultSet.getString("lessonName"));
+            }
+        	db.connectClose();
+            statement.close();
+            resultSet.close();	
+       
+    		
+    	}catch (Exception e) {
+    		System.out.println(e.getMessage());
+		} 
+    	
+    }
+   
+   void lessonID() {
+   	
+   	try {	
+   		db.connectOpen();
+       	query="SELECT * FROM lesson WHERE lessonName=?";
+       	statement=db.connection.prepareStatement(query);
+       	statement.setString(1,teacherLessonName_text.getSelectionModel().getSelectedItem());
+       	resultSet=statement.executeQuery();
+       	while (resultSet.next())
+           { 
+             lessonID=resultSet.getString("lessonID");
+           }
+       	db.connectClose();
+           statement.close();
+           resultSet.close();	
+      
+   		
+   	}catch (Exception e) {
+   		System.out.println(e.getMessage());
+		} 
+   	
+   }
+   
+   
     
-     
+    
+   void teacherAdd(){
+	   	try {
+			db.connectOpen();
+	    	query="INSERT INTO teacher(teacherName, teacherSurname, teacherClass, teacherLessonID, teacherUsername, teacherPassword) VALUES (?,?,?,?,?,?)";
+	    	statement=db.connection.prepareStatement(query);
+	    	statement.setString(1,teacherName_text.getText().trim());
+	    	statement.setString(2,teacherSurname_text.getText().trim());
+	    	statement.setString(3,teacherClass_text.getText().trim());
+	    	statement.setString(4,lessonID);
+	    	statement.setString(5,teacherUsername_text.getText().trim());
+	    	statement.setString(6,teacherPassword_text.getText().trim());
+	    	statement.execute();
+	    	db.connectClose();
+	        statement.close();
+	        comboBoxLoad(teacherName_cBox,teacherSurname_cBox);
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}  
+	   }
+	   
+	   void teacherDelete(){
+	   	try {
+			db.connectOpen();
+	    	query="DELETE FROM teacher WHERE teacherName=? AND teacherSurname=?";
+	    	statement=db.connection.prepareStatement(query);
+	    	statement.setString(1,teacherName_cBox.getSelectionModel().getSelectedItem());
+	    	statement.setString(2,teacherSurname_cBox.getSelectionModel().getSelectedItem());
+	    	statement.execute();
+	    	db.connectClose();
+	        statement.close();
+	        comboBoxLoad(teacherName_cBox, teacherSurname_cBox);
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		} 
+		
+		   
+	   }
+ 
     
 
     @FXML
     void teacherAdd_button_Click(ActionEvent event) {
-        comboBoxLoad(teacherName_cBox, teacherSurname_cBox);
+    	
+    	if(teacherName_text.getText()!="" & teacherSurname_text.getText()!=""& teacherUsername_text.getText()!="" & teacherPassword_text.getText()!="" & teacherLessonName_text.getSelectionModel().getSelectedItem()!="") {
+    		lessonID();
+    		teacherAdd();
+            comboBoxLoad(teacherName_cBox, teacherSurname_cBox);
+    	}
+    	else {
+    		uyariAdd_label.setVisible(false);
+    		
+    	}
 
     }
 
     @FXML
     void teacherDelete_button_Click(ActionEvent event) {
-        comboBoxLoad(teacherName_cBox, teacherSurname_cBox);
+    	if(teacherName_cBox.getSelectionModel().getSelectedItem()!="" & teacherSurname_cBox.getSelectionModel().getSelectedItem()!="") {
+    		teacherDelete();
+            comboBoxLoad(teacherName_cBox,teacherSurname_cBox);
+    	}
+    	else {
+    		uyaridel_label.setVisible(false);
+    		
+    	}
+    	
+       
 
     }
 
     @FXML
     void initialize() {
         comboBoxLoad(teacherName_cBox, teacherSurname_cBox);
+        comboBoxLoad2(teacherLessonName_text);
 
     }
 
