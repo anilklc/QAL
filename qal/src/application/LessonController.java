@@ -156,7 +156,7 @@ public class LessonController {
     
     @FXML
     void lessonDelete_button_Click(ActionEvent event) {
-    	if(lessonDel_cBox.getSelectionModel().getSelectedItem()!="") {	
+    	if(lessonDel_cBox.getSelectionModel().getSelectedItem()!=null) {	
         	lessonDelete(lessonDel_cBox.getSelectionModel().getSelectedItem());}
         	else {
         	uyaridel_label.setVisible(true);
@@ -165,7 +165,7 @@ public class LessonController {
     
     @FXML
     void lessonUpdate_button_Click(ActionEvent event) {
-    	if(lessonUpdate_cBox.getSelectionModel().getSelectedItem()!="" & lessonUpdate_text.getText()!="" ) {	
+    	if(lessonUpdate_cBox.getSelectionModel().getSelectedItem()!=null & lessonUpdate_text.getText()!="" ) {	
         	lessonUpdate();
         	}
         	else {
