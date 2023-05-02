@@ -171,5 +171,10 @@
             </Label>
          </children>
       </AnchorPane>
+      <Label fx:id="uyari3_label" layoutX="370.0" layoutY="383.0" prefHeight="27.0" prefWidth="302.0" text="NOT: Silme işleminde lütfen öğrencinin sınıfını yazınız." textFill="#fbbd0d" underline="true">
+         <font>
+            <Font name="Arial Black" size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
