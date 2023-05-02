@@ -192,7 +192,7 @@ public class TeacherController {
             comboBoxLoad(teacherName_cBox, teacherSurname_cBox);
     	}
     	else {
-    		uyariAdd_label.setVisible(false);
+    		uyariAdd_label.setVisible(true);
     		
     	}
 
@@ -200,13 +200,14 @@ public class TeacherController {
 
     @FXML
     void teacherDelete_button_Click(ActionEvent event) {
-    	if(teacherName_cBox.getSelectionModel().getSelectedItem()!="" & teacherSurname_cBox.getSelectionModel().getSelectedItem()!="") {
+    	if(teacherName_cBox.getSelectionModel().getSelectedItem()!=null & teacherSurname_cBox.getSelectionModel().getSelectedItem()!=null) {
+    		System.out.print(teacherName_cBox.getSelectionModel().getSelectedItem());
+    		
     		teacherDelete();
             comboBoxLoad(teacherName_cBox,teacherSurname_cBox);
     	}
     	else {
-    		uyaridel_label.setVisible(false);
-    		
+    		uyaridel_label.setVisible(true);
     	}
     	
        
