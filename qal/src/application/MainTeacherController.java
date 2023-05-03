@@ -55,6 +55,17 @@ public class MainTeacherController {
     	
     	
     }
+    
+  @FXML
+    void announcement_add_button_Click(ActionEvent event) {
+    	try {
+        	AnchorPane pane1= (AnchorPane) FXMLLoader.load(getClass().getResource("AnnouncementEditTeacher.fxml"));
+        	insidePane.getChildren().setAll(pane1);
+			
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+    }
 
     @FXML
     void close_button_Click(ActionEvent event) {
