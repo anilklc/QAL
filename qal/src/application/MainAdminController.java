@@ -56,6 +56,17 @@ public class MainAdminController {
 			System.out.print(e.getMessage());
 		}
     }
+    
+    @FXML
+    void announcement_button_Click(ActionEvent event) {
+    	try {
+        	AnchorPane pane1= (AnchorPane) FXMLLoader.load(getClass().getResource("AnnouncementAdmin.fxml"));
+        	insidePane.getChildren().setAll(pane1);
+			
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+    }
  
     @FXML
     void student_button_Click(ActionEvent event) {

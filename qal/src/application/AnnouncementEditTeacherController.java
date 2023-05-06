@@ -123,12 +123,13 @@ public class AnnouncementEditTeacherController {
     void announcementAdd(){
 	   	try {
 			db.connectOpen();
-	    	query="INSERT INTO announcement(announcementName, announcementText, announcementUsername, announcementClass,announcementDate) VALUES (?,?,?,?,(SELECT CURRENT_DATE))";
+	    	query="INSERT INTO announcement(announcementName, announcementText, announcementUsername, announcementClass,announcementDate,announcementType) VALUES (?,?,?,?,(SELECT CURRENT_DATE),?)";
 	    	statement=db.connection.prepareStatement(query);
 	    	statement.setString(1,announcementName_text.getText().trim());
 	    	statement.setString(2,announcement_textarea.getText());
 	    	statement.setString(3,usernameAdd_text.getText().trim());
 	    	statement.setString(4,lesson_text.getSelectionModel().getSelectedItem());
+	    	statement.setString(5,"0");
 	    	statement.execute();
 	    	db.connectClose();
 	        statement.close();
@@ -236,9 +237,9 @@ public class AnnouncementEditTeacherController {
 
     @FXML
     void initialize() {
-    	 comboBoxLoad(lesson_text,"SELECT * FROM lesson","lessonName");
+    	comboBoxLoad(lesson_text,"SELECT DISTINCT(studentClass) FROM student","studentClass");
          announcementDelete_button.setDisable(true);
-         //comboBoxLoad(username_cBox,"SELECT DISTINCT(announcementUsername) FROM announcement","announcementUsername");
+        
     }
 
 }

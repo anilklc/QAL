@@ -3,15 +3,21 @@ package application;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import DB.DBHelper;
+import Models.tableView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 public class AnnouncementTeacherController {
 
@@ -22,13 +28,16 @@ public class AnnouncementTeacherController {
     private URL location;
 
     @FXML
-    private Button announcementAdd_button;
+    private TableColumn<tableView,String> announcementDate_clm;
 
     @FXML
-    private Button announcementDelete_button;
+    private Label announcementDate_label;
 
     @FXML
-    private Button announcementGet_button;
+    private TextField announcementDate_text;
+
+    @FXML
+    private TableColumn<tableView,String> announcementName_clm;
 
     @FXML
     private Label announcementName_label;
@@ -37,10 +46,13 @@ public class AnnouncementTeacherController {
     private TextField announcementName_text;
 
     @FXML
-    private ComboBox<String> announcement_cBox;
+    private TableColumn<tableView,String> announcementType_clm;
 
     @FXML
-    private Label announcement_label;
+    private TableColumn<tableView,String> announcementUsername_clm;
+
+    @FXML
+    private Label announcement_label1;
 
     @FXML
     private TextArea announcement_textarea;
@@ -52,168 +64,97 @@ public class AnnouncementTeacherController {
     private Label info1;
 
     @FXML
-    private Label lesson_label;
+    private Label name_surname_label;
 
     @FXML
-    private ComboBox<String> lesson_text;
-
-
+    private TextField name_surname_text;
+   
+   
     @FXML
-    private Label usernameAdd_label;
+    private TableView<tableView> tableview;
 
-    @FXML
-    private TextField usernameAdd_text;
-
-    @FXML
-    private ComboBox<String> username_cBox;
-
-    @FXML
-    private Label uyariAdd_label;
-
-    @FXML
-    private Label uyaridel_label;
-
-    @FXML
-    private Label uyaridel_label1;
-    
-    @FXML
-    private ComboBox<String> announcementDate_cBox;
-
-    @FXML
-    private Label announcementDate_label;
     
     DBHelper db=new DBHelper();
     PreparedStatement statement;
     ResultSet resultSet;
     String query;
-    void comboBoxLoad(ComboBox<String> cmb,String query,String columnName) {
-    	
-    	try {	
-    		db.connectOpen();
-        	statement=db.connection.prepareStatement(query);
-        	resultSet=statement.executeQuery();
-        	while (resultSet.next())
-            { cmb.getItems().addAll(resultSet.getString(columnName)); 
-            }
-        	
-        	db.connectClose();
-            statement.close();
-            resultSet.close();
-       
-    		
-    	}catch (Exception e) {
-    		System.out.println(e.getMessage());
-		} 
-    	
-    }
+    tableView tbl=null;
+    ObservableList<tableView> tblList=FXCollections.observableArrayList();
     
+    private void refreshTable() {
+  	  try {
+  		    db.connectOpen();
+  	        query="SELECT * FROM announcement WHERE announcementType=2";
+  	        statement=db.connection.prepareStatement(query);
+     		resultSet=statement.executeQuery();
+     		tblList.clear();
+           while(resultSet.next()) {
+          	 
+          	 tblList.add(new tableView(resultSet.getString("announcementName"),resultSet.getString("announcementUsername"),resultSet.getString("announcementDate"),resultSet.getString("announcementType"),resultSet.getString("announcementText")));
+          	 tableview.setItems(tblList);
+           }
+           db.connectClose();
+           statement.close();
+           resultSet.close();	
+     		
+     		
+     	}catch (SQLException e) {
+  			System.out.println(e.getMessage());
+  		}
+
+      }
+     
+      private void loadData() {
+      	refreshTable();
+      	announcementName_clm.setCellValueFactory(new PropertyValueFactory<>("announcementName"));
+      	announcementUsername_clm.setCellValueFactory(new PropertyValueFactory<>("announcementUsername"));
+      	announcementDate_clm.setCellValueFactory(new PropertyValueFactory<>("announcementDate"));
+      	announcementType_clm.setCellValueFactory(new PropertyValueFactory<>("announcementType"));
+
+      	
+      }
       
-    
-    void announcementGet(){
-       	try {
-    		db.connectOpen();
-        	query="SELECT * FROM announcement WHERE announcementUsername=?";
-        	statement=db.connection.prepareStatement(query);
-        	statement.setString(1,username_cBox.getSelectionModel().getSelectedItem());
-        	resultSet=statement.executeQuery();
-        	announcement_cBox.getItems().clear();
-            announcementDate_cBox.getItems().clear();
-        	while (resultSet.next())
-            { announcement_cBox.getItems().addAll(resultSet.getString("announcementName"));
-              announcementDate_cBox.getItems().addAll(resultSet.getString("announcementDate"));
-            }
-        	db.connectClose();
-            statement.close();
-            resultSet.close();
-            
-    	}catch (Exception e) {
-    		System.out.println(e.getMessage());
-    	}  
-       }
-       
-       void announcementDelete(){
-       	try {
-    		db.connectOpen();
-        	query="DELETE FROM announcement WHERE announcementName=? and announcementDate=?;";
-        	statement=db.connection.prepareStatement(query);
-        	statement.setString(1,announcement_cBox.getSelectionModel().getSelectedItem());
-        	statement.setString(2,announcementDate_cBox.getSelectionModel().getSelectedItem());
-        	statement.execute();
-        	db.connectClose();
-            statement.close();
-            username_cBox.getItems().clear();
-            announcement_cBox.getItems().clear();
-            announcementDate_cBox.getItems().clear();
-            comboBoxLoad(username_cBox,"SELECT DISTINCT(announcementUsername) FROM announcement","announcementUsername");
-    	}catch (Exception e) {
-    		System.out.println(e.getMessage());
-    	} 
-    	
-    	   
-       }
-       
-       
-       void announcementAdd(){
-    	   	try {
-    			db.connectOpen();
-    	    	query="INSERT INTO announcement(announcementName, announcementText, announcementUsername, announcementClass,announcementDate) VALUES (?,?,?,?,(SELECT CURRENT_DATE))";
-    	    	statement=db.connection.prepareStatement(query);
-    	    	statement.setString(1,announcementName_text.getText().trim());
-    	    	statement.setString(2,announcement_textarea.getText());
-    	    	statement.setString(3,usernameAdd_text.getText().trim());
-    	    	statement.setString(4,lesson_text.getSelectionModel().getSelectedItem());
-    	    	statement.execute();
-    	    	db.connectClose();
-    	        statement.close();
-    	        username_cBox.getItems().clear();
-    	        comboBoxLoad(username_cBox,"SELECT DISTINCT(announcementUsername) FROM announcement","announcementUsername");
-    		}catch (Exception e) {
-    			System.out.println(e.getMessage());
-    		}  
-    	   }
-       
-
+      void nameSurnameLoad(String username,String query,String columnName,String columnName2) {
+    	  
+    	    	try {
+    	    		db.connectOpen();
+    	        	statement=db.connection.prepareStatement(query);
+    	        	statement.setString(1,username);
+    	        	resultSet=statement.executeQuery();
+    	        	while (resultSet.next())
+    	            { name_surname_text.setText(resultSet.getString(columnName)+" "+resultSet.getString(columnName2));
+    	            }
+    	        	db.connectClose();
+    	            statement.close();
+    	            resultSet.close();	
+    	       
+    	    		
+    	    	}catch (Exception e) {
+    	    		System.out.println(e.getMessage());
+    			}
+    	  
+    	  
+    	  
+      }
+      
+      @FXML
+      void tableview_Click(MouseEvent event) {
+      	tbl=tableview.getSelectionModel().getSelectedItem();
+      	announcementName_text.setText(tbl.getAnnouncementName());
+      	announcementDate_text.setText(tbl.getAnnouncementDate());
+      	nameSurnameLoad(tbl.getAnnouncementUsername(),"SELECT adminUsername,adminName,adminSurname FROM announcement INNER JOIN admin ON announcement.announcementUsername = admin.adminUsername WHERE announcementUsername=?","adminName" ,"adminSurname");
+      	announcement_textarea.setText(tbl.getAnnouncement());
+      	
+      }
+      
+      @FXML
+      void announcementRefresh_button_Click(ActionEvent event) {
+    	  loadData();
+      }
+      
     @FXML
-    void announcementAdd_button_Click(ActionEvent event) {
-    	
-    	if(announcementName_text.getText()!="" & announcement_textarea.getText()!="" & usernameAdd_text.getText()!="" & lesson_text.getSelectionModel().getSelectedItem()!=null) {
-    		announcementAdd();
-    	}
-    	else {
-    		uyariAdd_label.setVisible(true);
-    	}
-    }
-
-    @FXML
-    void announcementDelete_button_Click(ActionEvent event) {
-    	if(announcement_cBox.getSelectionModel().getSelectedItem()!=null & announcementDate_cBox.getSelectionModel().getSelectedItem()!=null) {
-    		announcementDelete();
-    		announcementDelete_button.setDisable(true);
-    	}
-    	else {
-    		uyaridel_label.setVisible(true);
-    	}
-    }
-
-    @FXML
-    void announcementGet_button_Click(ActionEvent event) {
-    	if(username_cBox.getSelectionModel().getSelectedItem()!=null) {
-    		announcementGet();
-    		announcementDelete_button.setDisable(false);
-    	}
-    	else {
-    		uyaridel_label.setVisible(true);
-    	}
-    	
-    }
-
-    @FXML
-    void initialize(){
-    	
-        comboBoxLoad(lesson_text,"SELECT * FROM lesson","lessonName");
-        announcementDelete_button.setDisable(true);
-        comboBoxLoad(username_cBox,"SELECT DISTINCT(announcementUsername) FROM announcement","announcementUsername");
-        
+    void initialize() {
+       loadData();
 
     }
 
