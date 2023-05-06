@@ -10,8 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 public class AnnouncementEditController {
 
@@ -81,6 +83,21 @@ public class AnnouncementEditController {
 
     @FXML
     private Label announcementDate_label;
+    
+    @FXML
+    private ToggleGroup see_type;
+    
+    @FXML
+    private RadioButton student_rbutton;
+
+    @FXML
+    private RadioButton teacher_rbutton;
+    
+    @FXML
+    private RadioButton all_rbutton;
+
+    @FXML
+    private Label see_label;
     
     DBHelper db=new DBHelper();
     PreparedStatement statement;
@@ -156,12 +173,13 @@ public class AnnouncementEditController {
        void announcementAdd(){
     	   	try {
     			db.connectOpen();
-    	    	query="INSERT INTO announcement(announcementName, announcementText, announcementUsername, announcementClass,announcementDate) VALUES (?,?,?,?,(SELECT CURRENT_DATE))";
+    	    	query="INSERT INTO announcement(announcementName, announcementText, announcementUsername, announcementClass,announcementDate,announcementType) VALUES (?,?,?,?,(SELECT CURRENT_DATE),?)";
     	    	statement=db.connection.prepareStatement(query);
     	    	statement.setString(1,announcementName_text.getText().trim());
     	    	statement.setString(2,announcement_textarea.getText());
     	    	statement.setString(3,usernameAdd_text.getText().trim());
     	    	statement.setString(4,lesson_text.getSelectionModel().getSelectedItem());
+    	    	statement.setString(5,type);
     	    	statement.execute();
     	    	db.connectClose();
     	        statement.close();
@@ -172,12 +190,21 @@ public class AnnouncementEditController {
     		}  
     	   }
        
-
+  String type;
     @FXML
     void announcementAdd_button_Click(ActionEvent event) {
     	
-    	if(announcementName_text.getText()!="" & announcement_textarea.getText()!="" & usernameAdd_text.getText()!="" & lesson_text.getSelectionModel().getSelectedItem()!=null) {
-    		announcementAdd();
+    	if(announcementName_text.getText()!="" & announcement_textarea.getText()!="" & usernameAdd_text.getText()!="") {
+    	 if(student_rbutton.isSelected()) {
+    		 type="0";
+    		announcementAdd();}
+    	 else if(teacher_rbutton.isSelected()) {
+    		 type="1";
+     		announcementAdd();}
+    	 else if(all_rbutton.isSelected()) {
+    		 type="2";
+      		announcementAdd();}
+    	 
     	}
     	else {
     		uyariAdd_label.setVisible(true);
@@ -210,7 +237,7 @@ public class AnnouncementEditController {
     @FXML
     void initialize(){
     	
-        comboBoxLoad(lesson_text,"SELECT * FROM lesson","lessonName");
+        comboBoxLoad(lesson_text,"SELECT DISTINCT(studentClass) FROM student","studentClass");
         announcementDelete_button.setDisable(true);
         comboBoxLoad(username_cBox,"SELECT DISTINCT(announcementUsername) FROM announcement","announcementUsername");
         
