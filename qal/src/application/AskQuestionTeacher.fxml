@@ -31,7 +31,7 @@
                   <TableColumn fx:id="answerDate_clm" prefWidth="129.59991455078125" text="Cevap Tarihi" />
                </columns>
             </TableView>
-            <TextField fx:id="usernameDel_text" layoutX="110.0" layoutY="183.0" prefHeight="26.0" prefWidth="167.0">
+            <TextField fx:id="username_text" layoutX="110.0" layoutY="183.0" prefHeight="26.0" prefWidth="167.0">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font>
