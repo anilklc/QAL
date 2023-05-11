@@ -22,13 +22,24 @@ public class MainStudentController {
     private Button profile_button;
 
     @FXML
-    private Button question_button;
+    private Button exam_button;
 
     @FXML
     private Button result_button;
     
     @FXML
     private AnchorPane insidePane;
+    
+    @FXML
+    void exam_button_Click(ActionEvent event) {
+    	try {
+        	AnchorPane pane1= (AnchorPane) FXMLLoader.load(getClass().getResource("ExamStudent.fxml"));
+        	insidePane.getChildren().setAll(pane1);
+			
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+    }
     
     @FXML
     void ask_button_Click(ActionEvent event) {
