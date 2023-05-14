@@ -197,7 +197,7 @@ public class ExamStudentController {
      void resultAdd(){
     	   	try {
     			db.connectOpen();
-    	    	query="INSERT INTO result(studentID,examID,correctQuestion,wrongQuestion,point) VALUES (?,?,?,?,?)";
+    	    	query="INSERT INTO result(studentID,examID,correctQuestion,wrongQuestion,point,loginDate) VALUES (?,?,?,?,?,(SELECT CURRENT_DATE))";
     	    	statement=db.connection.prepareStatement(query);
     	    	statement.setString(1,studentID);
     	    	statement.setString(2,examID);
