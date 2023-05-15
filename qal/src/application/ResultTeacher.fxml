@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #2c2d2e;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ResultStudentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #2c2d2e;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ResultTeacherController">
    <children>
       <Label layoutX="18.0" layoutY="4.0" text="Sınav Sonuç İşlemleri" textFill="#fbbd0d" underline="true">
          <font>
@@ -112,12 +112,13 @@
             </Label>
             <TableView fx:id="tableview" layoutX="14.0" layoutY="27.0" prefHeight="302.0" prefWidth="653.0">
               <columns>
-                <TableColumn fx:id="examName_clm" prefWidth="125.0" text="Sınav Adı" />
-                  <TableColumn fx:id="lessonName_clm" prefWidth="125.0" text="Ders Adı" />
-                <TableColumn fx:id="correctQuestion_clm" prefWidth="85.0" text="Doğru Sayısı" />
-                  <TableColumn fx:id="wrongQuestion_clm" prefWidth="85.0" text="Yanlış Sayısı" />
-                  <TableColumn fx:id="point_clm" minWidth="0.0" prefWidth="100.0" text="Puan" />
-                  <TableColumn fx:id="loginDate_clm" minWidth="0.0" prefWidth="130.0" text="Sınav Giriş Tarihi" />
+                  <TableColumn fx:id="studentName_clm" prefWidth="134.39996910095215" text="Ogrenci Adı" />
+                <TableColumn fx:id="examName_clm" prefWidth="100.0" text="Sınav Adı" />
+                  <TableColumn fx:id="studentName_clm" prefWidth="85.60003662109375" text="Ders Adı" />
+                <TableColumn fx:id="correctQuestion_clm" prefWidth="80.79998779296875" text="Doğru Sayısı" />
+                  <TableColumn fx:id="wrongQuestion_clm" prefWidth="81.5999755859375" text="Yanlış Sayısı" />
+                  <TableColumn fx:id="point_clm" minWidth="0.0" prefWidth="53.5999755859375" text="Puan" />
+                  <TableColumn fx:id="loginDate_clm" minWidth="0.0" prefWidth="130.4000244140625" text="Sınav Giriş Tarihi" />
               </columns>
             </TableView>
          </children>

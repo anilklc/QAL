@@ -41,9 +41,6 @@ public class ResultTeacherController {
     private Label info1;
 
     @FXML
-    private TableColumn<?, ?> lessonName_clm;
-
-    @FXML
     private ComboBox<?> lesson_cBox;
 
     @FXML
@@ -69,6 +66,9 @@ public class ResultTeacherController {
 
     @FXML
     private DatePicker start_date;
+
+    @FXML
+    private TableColumn<?, ?> studentName_clm;
 
     @FXML
     private TableView<?> tableview;
@@ -100,7 +100,7 @@ public class ResultTeacherController {
 
     @FXML
     void initialize() {
-     
+        
 
     }
 
