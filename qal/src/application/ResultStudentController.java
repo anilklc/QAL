@@ -1,7 +1,11 @@
 package application;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
+
+import DB.DBHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,7 +41,7 @@ public class ResultStudentController {
     private TableColumn<?, ?> lessonName_clm;
 
     @FXML
-    private ComboBox<?> lesson_cBox;
+    private ComboBox<String> lesson_cBox;
 
     @FXML
     private Label lesson_label;
@@ -77,7 +81,40 @@ public class ResultStudentController {
 
     @FXML
     private TableColumn<?, ?> wrongQuestion_clm;
+    
+    
+    DBHelper db=new DBHelper();
+    PreparedStatement statement;
+    ResultSet resultSet;
+    String query;
+    
 
+       void comboBoxLoad(ComboBox<String> cmb) {
+    	
+    	try {	
+    		db.connectOpen();
+        	query="SELECT * FROM lesson";
+        	statement=db.connection.prepareStatement(query);
+        	resultSet=statement.executeQuery();
+        	lesson_cBox.getItems().clear();
+        	
+        	while (resultSet.next())
+            { cmb.getItems().addAll(resultSet.getString("lessonName")); 
+             
+            }
+        	db.connectClose();
+            statement.close();
+            resultSet.close();	
+       
+    		
+    	}catch (Exception e) {
+    		System.out.println(e.getMessage());
+		} 
+    	
+    }
+    
+    
+    
     @FXML
     void resultFind_button_Click(ActionEvent event) {
 
