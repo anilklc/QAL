@@ -1,7 +1,12 @@
 package application;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
+
+import DB.DBHelper;
+import Models.tableViewResult;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,13 +28,13 @@ public class ResultAdminController {
     private URL location;
 
     @FXML
-    private TableColumn<?, ?> correctQuestion_clm;
+    private TableColumn<tableViewResult, String> correctQuestion_clm;
 
     @FXML
-    private TableColumn<?, ?> examName_clm;
+    private TableColumn<tableViewResult, String> examName_clm;
 
     @FXML
-    private ComboBox<?> find_cBox;
+    private ComboBox<String> find_cBox;
 
     @FXML
     private Label find_label;
@@ -41,10 +46,10 @@ public class ResultAdminController {
     private Label info1;
 
     @FXML
-    private ComboBox<?> lesson_cBox;
+    private ComboBox<String> lesson_cBox;
 
     @FXML
-    private TableColumn<?, ?> loginDate_clm;
+    private TableColumn<tableViewResult, String> loginDate_clm;
 
     @FXML
     private Label password_label;
@@ -53,7 +58,7 @@ public class ResultAdminController {
     private PasswordField password_text;
 
     @FXML
-    private TableColumn<?, ?> point_clm;
+    private TableColumn<tableViewResult, String> point_clm;
 
     @FXML
     private AnchorPane questionPane;
@@ -68,10 +73,10 @@ public class ResultAdminController {
     private DatePicker start_date;
 
     @FXML
-    private TableColumn<?, ?> studentName_clm;
+    private TableColumn<tableViewResult, String> studentName_clm;
 
     @FXML
-    private TableView<?> tableview;
+    private TableView<tableViewResult> tableview;
 
     @FXML
     private Label username_label;
@@ -86,7 +91,39 @@ public class ResultAdminController {
     private Label uyari_label;
 
     @FXML
-    private TableColumn<?, ?> wrongQuestion_clm;
+    private TableColumn<tableViewResult, String> wrongQuestion_clm;
+    
+    DBHelper db=new DBHelper();
+    PreparedStatement statement;
+    ResultSet resultSet;
+    String query;
+    
+
+       void comboBoxLoad(ComboBox<String> cmb) {
+    	
+    	try {	
+    		db.connectOpen();
+        	query="";
+        	statement=db.connection.prepareStatement(query);
+        	resultSet=statement.executeQuery();
+        	lesson_cBox.getItems().clear();
+        	
+        	while (resultSet.next())
+            { cmb.getItems().addAll(resultSet.getString("lessonName")); 
+             
+            }
+        	db.connectClose();
+            statement.close();
+            resultSet.close();	
+       
+    		
+    	}catch (Exception e) {
+    		System.out.println(e.getMessage());
+		} 
+    	
+    }
+    
+
 
     @FXML
     void resultFind_button_Click(ActionEvent event) {
