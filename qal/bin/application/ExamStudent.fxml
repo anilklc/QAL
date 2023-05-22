@@ -35,7 +35,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/question.png" />
+                        <Image url="@../image/exam_find.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -51,7 +51,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/question.png" />
+                        <Image url="@../image/exam_go.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -146,7 +146,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/question.png" />
+                        <Image url="@../image/next_question.png" />
                      </image>
                   </ImageView>
                </graphic>
