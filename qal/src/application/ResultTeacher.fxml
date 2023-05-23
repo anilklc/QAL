@@ -44,7 +44,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <ComboBox fx:id="find_cBox" layoutX="107.0" layoutY="52.0" prefHeight="26.0" prefWidth="167.0" />
+            <ComboBox fx:id="find_cBox" disable="true" layoutX="107.0" layoutY="52.0" onMouseClicked="#find_cBox_Click" prefHeight="26.0" prefWidth="167.0" />
             <Label fx:id="info" layoutX="15.0" layoutY="-4.0" prefHeight="27.0" prefWidth="189.0" text="Sınav Sonuç Kontrol" textFill="#fbbd0d" underline="true">
                <font>
                   <Font name="Arial Black" size="16.0" />
@@ -79,8 +79,8 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <ComboBox fx:id="lesson_cBox" layoutX="319.0" layoutY="53.0" prefHeight="26.0" prefWidth="167.0" visible="false" />
-            <TextField fx:id="username_text1" layoutX="319.0" layoutY="53.0" prefHeight="26.0" prefWidth="167.0" visible="false">
+            <ComboBox fx:id="examName_cBox" layoutX="319.0" layoutY="53.0" prefHeight="26.0" prefWidth="167.0" visible="false" />
+            <TextField fx:id="userSearch_text" layoutX="319.0" layoutY="53.0" prefHeight="26.0" prefWidth="167.0" visible="false">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font>
@@ -114,7 +114,7 @@
               <columns>
                   <TableColumn fx:id="studentName_clm" prefWidth="134.39996910095215" text="Ogrenci Adı" />
                 <TableColumn fx:id="examName_clm" prefWidth="100.0" text="Sınav Adı" />
-                  <TableColumn fx:id="studentName_clm" prefWidth="85.60003662109375" text="Ders Adı" />
+                  <TableColumn fx:id="lessonName_clm" prefWidth="85.60003662109375" text="Ders Adı" />
                 <TableColumn fx:id="correctQuestion_clm" prefWidth="80.79998779296875" text="Doğru Sayısı" />
                   <TableColumn fx:id="wrongQuestion_clm" prefWidth="81.5999755859375" text="Yanlış Sayısı" />
                   <TableColumn fx:id="point_clm" minWidth="0.0" prefWidth="53.5999755859375" text="Puan" />
