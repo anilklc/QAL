@@ -21,11 +21,13 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import javafx.scene.layout.AnchorPane;
 
 
 public class LoginController {
     
+    @FXML
+    private AnchorPane scenePane;
     
     @FXML
     private ResourceBundle resources;
@@ -63,18 +65,19 @@ public class LoginController {
     @FXML
     private Label id_label;
     
-   
-   public void stage(String stageName) throws Exception {
-	   
-    	Parent root=FXMLLoader.load(getClass().getResource(stageName));
-    	Stage stage=new Stage();
-    	Scene scene=new Scene(root);
-    	stage.setTitle("QAL");
-    	stage.getIcons().add(new Image("D:\\javaFX\\qal\\src\\image\\icon.png"));
-    	stage.setScene(scene);
-    	stage.initStyle(StageStyle.UTILITY);
-    	stage.show();
+    public void stage(String stageName) throws Exception {
+    	Stage window= new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource(stageName));
+        Image icon = new Image(getClass().getResourceAsStream("/image/icon.png"));
+		window.getIcons().add(icon); 
+		window.setTitle("QAL");
+		window.initStyle(StageStyle.UTILITY);
+        window.setScene(new Scene(root));
+        window.show();
+        Stage stage = (Stage) scenePane.getScene().getWindow();
+        stage.close();
     }
+  
    
 
 	DBHelper db=new DBHelper();
