@@ -17,13 +17,10 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.getIcons().add(new Image("D:\\javaFX\\qal\\src\\image\\icon.png"));
-			primaryStage.initStyle(StageStyle.TRANSPARENT);
-
-
+		    Image icon = new Image(getClass().getResourceAsStream("/image/icon.png"));
+			primaryStage.getIcons().add(icon); 
 			primaryStage.setTitle("Login");
-			
-			
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
