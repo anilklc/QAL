@@ -60,7 +60,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/teacher.png" />
+                        <Image url="@../image/teacher_add.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -131,7 +131,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/teacher.png" />
+                        <Image url="@../image/teacher_delete.png" />
                      </image>
                   </ImageView>
                </graphic>
