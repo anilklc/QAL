@@ -130,9 +130,10 @@ public class ExamStudentController {
 	
 	try {	
 		db.connectOpen();
-    	query="SELECT * FROM exam WHERE class=? AND startDate<=(SELECT CURRENT_DATE) AND finishDate>=(SELECT CURRENT_DATE)";
+    	query="SELECT * FROM exam INNER JOIN result ON exam.examID=result.examID WHERE class=? AND result.studentID!=? AND startDate<=(SELECT CURRENT_DATE) AND finishDate>=(SELECT CURRENT_DATE)";
     	statement=db.connection.prepareStatement(query);
     	statement.setString(1,studentClass);
+    	statement.setString(2,studentID);
     	resultSet=statement.executeQuery();
     	while (resultSet.next())
         { cmb.getItems().addAll(resultSet.getString("examName")); 
