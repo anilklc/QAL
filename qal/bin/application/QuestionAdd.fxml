@@ -67,7 +67,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
-            <Label fx:id="uyari_label" layoutX="338.0" layoutY="24.0" prefHeight="27.0" prefWidth="218.0" text="Lütfen boş alanları doldurunuz" textFill="#fbbd0d" visible="false">
+            <Label fx:id="uyari_label" layoutX="338.0" layoutY="24.0" prefHeight="27.0" prefWidth="230.0" text="Lütfen boş alanları doldurunuz" textFill="#fbbd0d" visible="false">
                <font>
                   <Font name="Arial Black" size="13.0" />
                </font>
@@ -120,6 +120,11 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+            </Label>
+            <Label fx:id="uyariExamName_label" layoutX="308.0" layoutY="24.0" prefHeight="27.0" prefWidth="360.0" text="Sınav Adını Lütfen Değiştirip Tekrar Deneyiniz." textFill="#fbbd0d" visible="false">
+               <font>
+                  <Font name="Arial Black" size="13.0" />
+               </font>
             </Label>
          </children>
       </AnchorPane>
