@@ -113,6 +113,9 @@ public class QuestionAddController {
     @FXML
     private Label questionInfo_label;
     
+    @FXML
+    private Label uyariExamName_label;
+    
     DBHelper db=new DBHelper();
     PreparedStatement statement;
     ResultSet resultSet;
@@ -167,7 +170,25 @@ public class QuestionAddController {
  		} 
      	
      }
-    
+    int examControl=0;
+    void examNameControl(String examName) {
+    	try {
+		db.connectOpen();
+    	query="SELECT * FROM exam WHERE examName=?";
+    	statement=db.connection.prepareStatement(query);
+    	statement.setString(1,examName__text.getText().trim());
+    	resultSet=statement.executeQuery();
+    	resultSet.next();
+    	if (examName__text.getText().equals(resultSet.getString("examName")))
+        {  examControl=1;
+        }
+    	db.connectClose();
+        statement.close();
+        resultSet.close();
+	}catch (Exception e) {
+		System.out.println(e.getMessage());
+	}  
+    }
     void examAdd(){
        	try {System.out.println(start_date.getValue());
     		db.connectOpen();
@@ -236,8 +257,11 @@ public class QuestionAddController {
    int count=0;
     @FXML
     void control_button_Click(ActionEvent event) {
+    	
     	if(username_text.getText()!="" & password_text.getText()!="") {
     		userInfo();
+    		examNameControl(examID);
+    		if(examControl==0) {
     		if(class_cBox.getSelectionModel().getSelectedItem()!=null & examName__text.getText()!="" & totalQuestion_text.getText()!="" & lesson!=null & teacherID!=null & start_date.toString()!=null & finish_date.toString()!=null) {
     			examAdd();
     			count=Integer.parseInt(totalQuestion_text.getText().trim());
@@ -248,12 +272,14 @@ public class QuestionAddController {
     			uyari_label.setVisible(true);
     		}
     	}
+    		else{
+    			uyariExamName_label.setVisible(true);
+    		}}
     	
     	else {
     		
     		uyari_label.setVisible(true);
     	}
-       
     }
  String imageControl;
  
