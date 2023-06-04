@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import DB.DBHelper;
 import Models.tableViewAskQuestion;
 import javafx.collections.FXCollections;
@@ -89,7 +88,7 @@ public class AskQuestionTeacherController {
     PreparedStatement statement;
     ResultSet resultSet;
     String query;
-    tableViewAskQuestion tbl=null;
+   tableViewAskQuestion tbl=null;
     ObservableList<tableViewAskQuestion> tblList=FXCollections.observableArrayList();
     String teacherName,lessonID,teacherLesson;
     void userInfo() {
