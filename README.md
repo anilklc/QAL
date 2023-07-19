@@ -7,9 +7,9 @@ Günümüz eğitiminde teknoloji çok büyük alan kaplamaktadır QAL uygulamas�
 #SCREEN SHOT
 
 NOT: DAHA FAZLA EKRAN GÖRÜNTÜSÜ İÇİN RESİMLERİN ÜSTÜNE TIKLAYINIZ.
-[![screenshot](ScreenShot/1.png)](https://github.com/Iskenderun-Technical-University/ymg-donem-projesi-202503077/tree/main/ScreenShot) 
-[![screenshot](ScreenShot/5.png)](https://github.com/Iskenderun-Technical-University/ymg-donem-projesi-202503077/tree/main/ScreenShot) 
-[![screenshot](ScreenShot/10.png)](https://github.com/Iskenderun-Technical-University/ymg-donem-projesi-202503077/tree/main/ScreenShot) 
+[![screenshot](ScreenShot/1.png)](https://github.com/anilklc/QAL/tree/main/ScreenShot) 
+[![screenshot](ScreenShot/5.png)](https://github.com/anilklc/QAL/tree/main/ScreenShot) 
+[![screenshot](ScreenShot/10.png)](https://github.com/anilklc/QAL/tree/main/ScreenShot) 
 
 #USE-CASE DİAGRAM
 ![ DİAGRAM ](https://raw.githubusercontent.com/Iskenderun-Technical-University/ymg-donem-projesi-202503077/main/UML_Diagram.png)
